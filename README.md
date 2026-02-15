@@ -1,3 +1,7 @@
+Code source: adapted from @LastGregStanding's unit converter microservice
+Date: 02/14/2026
+URL: https://github.com/LastGregStanding/unit-conversion-microservice
+
 # Quote Generator Microservice
 
 ## Supported Categories
