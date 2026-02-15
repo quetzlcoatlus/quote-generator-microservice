@@ -36,7 +36,7 @@ Example using category as motivational.
 ### Error Response (400):
 ```
 {
-  "error": "Conversion not supported"
+  "error": "Category not supported"
 }
 ```
 
