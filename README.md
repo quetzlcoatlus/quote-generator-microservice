@@ -27,7 +27,7 @@ Service that generates quotes based on category provided.
 
 ## How to Use
 
-Example using category as motivational.
+Example using category as motivational. Send a POST request with a JSON body containing key-value "category": "category_name"
 
 ### Request:
 
