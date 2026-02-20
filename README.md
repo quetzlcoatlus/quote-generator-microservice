@@ -1,16 +1,21 @@
 # Citation
+
 - Code source: adapted from @LastGregStanding's unit converter microservice
 - Date: 02/14/2026
 - URL: https://github.com/LastGregStanding/unit-conversion-microservice
 
 # Quote Generator Microservice
 
+Service that generates quotes based on category provided.
+
 ## Supported Categories
+
 - motivational: random motivational quote
 - health: random health fact
 - video_game: random video game quote
 
 ## Setup
+
 1. Install Flask
    ```
    pip install flask
@@ -25,12 +30,15 @@
 Example using category as motivational.
 
 ### Request:
+
 ```
 {
   "category": "motivation",
 }
 ```
+
 ### Success Response (200):
+
 ```
 {
   "quote": random_quote: str,
@@ -39,6 +47,7 @@ Example using category as motivational.
 ```
 
 ### Error Response (400):
+
 ```
 {
   "error": "Category not supported"
@@ -46,6 +55,7 @@ Example using category as motivational.
 ```
 
 ### Python Code Example:
+
 ```
 import requests
 
@@ -65,6 +75,7 @@ print(quote) # Output will be a JSON random quote and source
 ```
 
 ### Notes:
+
 - Set of 5 quotes (as of writing) for each category
 
 ### UML Diagram
