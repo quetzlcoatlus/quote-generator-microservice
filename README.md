@@ -66,3 +66,7 @@ print(quote) # Output will be a JSON random quote and source
 
 ### Notes:
 - Set of 5 quotes (as of writing) for each category
+
+### UML Diagram
+
+![UML Diagram](quote-generator-UML.png)
