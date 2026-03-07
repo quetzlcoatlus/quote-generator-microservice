@@ -4,15 +4,13 @@ import random
 app = Flask(__name__)
 PORT = 5004
 
-
-# Basic class for holding the information
+# Basic class for holding quote information
 class Quote():
     def __init__(self, quote: str, source: str | None = None):
         self.quote = quote
         self.source = source # Not required
 
-
-# Each element is an object with a quote, author and source attribute
+# Each element is an object with a quote and source attribute
 # Accessed with .quote, .author and .source respectively
 MOTIVATIONAL_QUOTES = [
     Quote(
@@ -36,7 +34,6 @@ MOTIVATIONAL_QUOTES = [
         "Aristotle"
     )
 ]
-
 HEALTH_FACTS = [
     Quote(
         "Laughter boosts the immune system.",
@@ -59,7 +56,6 @@ HEALTH_FACTS = [
         "https://ohmyfacts.com/health-wellness/45-facts-about-health/"
     )
 ]
-
 VIDEO_GAME_QUOTES = [
     Quote(
         "It’s dangerous to go alone, take this!", 
@@ -83,7 +79,13 @@ VIDEO_GAME_QUOTES = [
     )
 ]
 
-# POST request to domain:PORT/route with JSON object
+categories = {
+    'motivational': MOTIVATIONAL_QUOTES,
+    'health': HEALTH_FACTS,
+    'video_game': VIDEO_GAME_QUOTES
+}
+
+# POST request to domain:PORT/quote with JSON object
 # REQ has 'category' which has a domain of
 # 'motivational', 'health', and 'video_game'
 # RES json object with 'quote' and 'source'
@@ -93,40 +95,14 @@ def quote():
     data = request.json
     category = data['category']
 
-    match(category):
-        case 'motivational':
-            quote = random_motivational_quote()
-            return jsonify_quote(quote), 200
-        case 'health':
-            quote = random_health_fact()
-            return jsonify_quote(quote), 200
-        case 'video_game':
-            quote = random_video_game_quote()
-            return jsonify_quote(quote), 200
-        case _:
-            return jsonify({'error': 'Category not supported'}), 400
-
+    quote_list = categories.get(category)
+    if not quote_list:
+        return jsonify({'error': 'Category not supported'}), 400
+    return jsonify_quote(random.choice(quote_list)), 200
+            
 # -----------------------------------------
 # Helper Functions
 # -----------------------------------------
-
-# Returns random quote object from MOTIVATIONAL_QUOTES
-def random_motivational_quote():
-    i = random.randint(0,len(MOTIVATIONAL_QUOTES)-1)
-    return MOTIVATIONAL_QUOTES[i]
-
-
-# Returns random quote object from HEALTH_FACTS
-def random_health_fact():
-    i = random.randint(0,len(HEALTH_FACTS)-1)
-    return HEALTH_FACTS[i]
-
-
-# Returns random quote object from VIDEO_GAME_QUOTES
-def random_video_game_quote():
-    i = random.randint(0,len(VIDEO_GAME_QUOTES)-1)
-    return VIDEO_GAME_QUOTES[i]
-
 
 # Converts quote object into JSON
 def jsonify_quote(quote: Quote):
